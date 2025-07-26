@@ -37,6 +37,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "e10cd082-385d-41af-a478-5ae4c479ba79"
+      }
+    },
+    "owner": "trex8u247"
   }
 }
