@@ -1,81 +1,51 @@
-// index.tsx
-import React, { useState } from "react";
-import { registerRootComponent } from "expo";
-import {
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  Alert,
-  SafeAreaView,
-  KeyboardAvoidingView,
-  Platform,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import ThemedView from "../../src/components/common/ThemedView";
+import Colors from "../../src/constants/Colors";
+import Typography from "../../src/constants/Typography";
 
-const HomeScreen: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleLogin = () => {
-    if (email && password) {
-      Alert.alert("Login Successful", `Welcome back, ${email}`);
-      // You could navigate or trigger more logic here
-    } else {
-      Alert.alert("Login Error", "Please fill in both fields");
-    }
-  };
-
+export default function HomeScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-      >
-        <Text style={styles.title}>Welcome to Sip Seekers ☕🌍</Text>
+    <ThemedView safe style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.greeting}>Good morning! ☕</Text>
+        <Text style={styles.subtitle}>Ready to share your brew?</Text>
+      </View>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-
-        <Button title="Login" onPress={handleLogin} />
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+      <View style={styles.content}>
+        <Text style={styles.placeholder}>Feed coming soon...</Text>
+      </View>
+    </ThemedView>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+  },
+  header: {
     padding: 20,
-    backgroundColor: "#fdfdfd",
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.light.border,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  title: {
-    fontSize: 22,
-    textAlign: "center",
-    marginBottom: 30,
-    fontWeight: "600",
+  greeting: {
+    ...Typography.h2,
+    color: Colors.light.text,
+    marginBottom: 4,
   },
-  input: {
-    height: 40,
-    borderColor: "#ccc",
-    borderWidth: 1,
-    marginBottom: 12,
-    paddingHorizontal: 10,
-    borderRadius: 6,
+  subtitle: {
+    ...Typography.body,
+    color: Colors.light.textLight,
+  },
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  placeholder: {
+    ...Typography.body,
+    color: Colors.light.textLight,
   },
 });
 
-registerRootComponent(HomeScreen);

@@ -1,50 +1,175 @@
-# Welcome to your Expo app 👋
+# BrewSpot - Coffee Location Sharing App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native app built with Expo where users can check in at locations with their coffee and share photos.
 
-## Get started
+## Features
 
-1. Install dependencies
+- ✅ User authentication with Supabase
+- ✅ Email/password sign up and sign in
+- ✅ Coffee-themed UI with custom colors (browns, creams, sunset coral)
+- ✅ Tab navigation for main app
+- ✅ Profile management with sign out
+- ✅ Platform-specific secure storage (SecureStore for native, AsyncStorage for web)
+- ✅ Loading states and error handling
+- ✅ Responsive keyboard handling
+- ✅ Custom Inter font family
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
 
-2. Start the app
+- Expo SDK 53
+- React Native 0.79.5
+- TypeScript with strict mode
+- Expo Router for file-based navigation
+- Supabase for authentication backend
+- Expo Secure Store for secure token storage (native)
+- AsyncStorage for web platform
 
-   ```bash
-   npx expo start
-   ```
+## Setup Instructions
 
-In the output, you'll find options to open the app in a
+### 1. Prerequisites
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Node.js (v16 or higher)
+- npm or yarn
+- Expo CLI (`npm install -g expo-cli`)
+- iOS Simulator (Mac) or Android Emulator
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 2. Clone and Install
 
 ```bash
-npm run reset-project
+# Clone the repository
+git clone [your-repo-url]
+cd keenan.molver-app
+
+# Install dependencies
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 3. Configure Supabase
 
-## Learn more
+✅ **Note: Supabase credentials are already configured in this project.**
 
-To learn more about developing your project with Expo, look at the following resources:
+**Important**: Make sure Email Auth is enabled in your Supabase project:
+- Go to Authentication → Providers in your Supabase dashboard
+- Enable the Email provider
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+If you need to use your own Supabase instance:
+1. Create a free account at [supabase.com](https://supabase.com)
+2. Create a new project
+3. Go to Settings → API in your Supabase dashboard
+4. Copy your Project URL and anon key
+5. Update `src/services/supabase.ts` with your credentials
+6. Enable Email Auth in Authentication → Providers
 
-## Join the community
+### 4. Run the App
 
-Join our community of developers creating universal apps.
+```bash
+# Start the development server
+npm start
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Run on iOS
+npm run ios
+
+# Run on Android
+npm run android
+
+# Run on web
+npm run web
+```
+
+## Project Structure
+
+```
+app/
+├── _layout.tsx         # Root layout with AuthProvider
+├── index.tsx          # Entry point, handles auth routing
+├── (auth)/            # Authentication screens
+│   ├── _layout.tsx    # Auth stack navigator
+│   ├── welcome.tsx    # Welcome screen with gradient
+│   ├── sign-in.tsx    # Sign in screen
+│   └── sign-up.tsx    # Sign up screen with validation
+└── (tabs)/            # Main app screens
+    ├── _layout.tsx    # Tab navigator
+    ├── index.tsx      # Home feed (placeholder)
+    └── profile.tsx    # User profile with sign out
+
+src/
+├── components/        # Reusable components
+│   ├── auth/         # Auth-specific components
+│   │   ├── AuthButton.tsx
+│   │   └── AuthInput.tsx
+│   └── common/       # Shared components
+│       ├── LoadingScreen.tsx
+│       └── ThemedView.tsx
+├── services/         # External services
+│   └── supabase.ts   # Supabase client with platform-specific storage
+├── contexts/         # React contexts
+│   └── AuthContext.tsx # Auth state management
+├── constants/        # App constants
+│   ├── Colors.ts     # Theme colors
+│   └── Typography.ts # Font styles
+└── types/           # TypeScript types
+    └── auth.types.ts # Auth interfaces
+```
+
+## Available Scripts
+
+- `npm start` - Start the Expo development server
+- `npm run ios` - Run on iOS simulator
+- `npm run android` - Run on Android emulator
+- `npm run web` - Run in web browser
+- `npm run lint` - Run ESLint
+
+## Screens Preview
+
+### Authentication Flow
+1. **Welcome Screen** - Coffee-themed gradient background with sign in/sign up options
+2. **Sign In Screen** - Email and password fields with forgot password link
+3. **Sign Up Screen** - Registration with password confirmation and terms acceptance
+
+### Main App
+1. **Home Tab** - Feed placeholder (ready for coffee spot posts)
+2. **Profile Tab** - User email display and sign out functionality
+
+## Testing the App
+
+1. **Create an Account**:
+   - Tap "Create Account" on the welcome screen
+   - Enter a valid email and password (min 6 characters)
+   - Confirm your password
+   - Check your email for verification link
+
+2. **Sign In**:
+   - Use your email and password
+   - App remembers your session between launches
+   - Automatic redirect to home tab after successful login
+
+3. **Sign Out**:
+   - Go to the Profile tab
+   - Tap "Sign Out" button
+   - Returns to welcome screen
+
+## Known Issues & Solutions
+
+- **Web Platform**: Uses AsyncStorage instead of SecureStore for compatibility
+- **Email Verification**: Required by Supabase for new accounts
+- **Session Persistence**: Works across app restarts on all platforms
+
+## Next Steps
+
+- [ ] Add password reset functionality
+- [ ] Implement social login (Google, Apple)
+- [ ] Create location check-in functionality
+- [ ] Add photo upload capability
+- [ ] Implement coffee spot feed
+- [ ] Add location-based features
+- [ ] Create user profiles with avatars
+- [ ] Add favorites and ratings system
+- [ ] Implement push notifications
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+## License
+
+MIT

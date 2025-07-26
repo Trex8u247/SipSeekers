@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "sipseekers",
-    "slug": "sipseekers",
+    "name": "keenan.molver-app",
+    "slug": "keenan.molver-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "sipseekers",
+    "scheme": "keenanmolverapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
@@ -37,13 +37,6 @@
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "e10cd082-385d-41af-a478-5ae4c479ba79"
-      }
-    },
-    "owner": "trex8u247"
+    }
   }
 }
